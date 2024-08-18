@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="shortcut icon" href="{% static 'src/icon_fav.png' %}" type="image/x-icon">
+    <title>III COAMA - CONGRESSO AMAZÔNICO DE MINERAÇÃO, METALURGIA E MATERIAIS</title>
+</head>
+
+<body>
+    <!--Botao de rolagem ao topo-->
+    <article>
+        <button class="scrollTop" onclick="backTop();">
+            <img src="{% static 'src/arrow_top.svg' %}" alt="Botão para voltar ao topo da página">
+        </button>
+    </article>
+    <script src="{% static '/js/arrow_top.js' %}"></script>
+    <!--inicio menu login-->
+    <div class="background-menu-login">
+        <div class="container">
+            <nav class="menu-login">
+                <div class="menu-login-esquerda">
+                    <a href="mailto:coama.event@gmail.com" target="_blank">
+                        <img src="{% static 'src/envelope.png' %}" alt="Icone e-mail" class="icon">
+                        <span>coama.event@gmail.com</span>
+                    </a>
+                    <a href="https://api.whatsapp.com/send?phone=5594984449527" target="_blank">
+                        <img src="{% static 'src/whatsapp.png' %}" alt="Icone Whatsapp" class="icon">
+                        <span>(94)98444-9527</span>
+                    </a>
+                </div>
+                <div class="menu-login-direita">
+                    <a href="{% url "login" %}" target="_blank">
+                        <img src="{% static 'src/user.png' %}" alt="" class="icon-login">
+                        <span>Área do Participante</span>
+                    </a>
+                </div>
+                <div class="redes">
+                    <a href="https://www.linkedin.com/in/congresso-amazonico-de-mineracao-metalurgia-e-materiais/?originalSubdomain=br"
+                        target="_blank"><img src="{% static 'src/linkedin.png' %}" alt="Icone Linkedin"
+                            class="icon"></a>
+                    <a href="https://www.tiktok.com/@evento.coama?_t=8lr5zr2LhiP&_r=1" target="_blank"><img
+                            src="{% static 'src/tiktok.png' %}" alt="Icone Tiktok" class="icon"></a>
+                    <a href="https://www.instagram.com/eventocoama/" target="_blank"><img
+                            src="{% static 'src/instagram.png' %}" alt="Icone Instagram" class="icon"></a>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!--fim menu login-->
+
+    <!--início menu principal-->
+    <div id="main-heather" class="menu-principal-container">
+        <div class="container">
+            <nav class="menu-principal">
+                <div class="logo-mobile-only">
+                    <a href="#inicio"><img src="{% static 'src/logo_mobile.png' %}" alt="Logo da COAMA"></a>
+                    <span class="logo-text">24, 25 e 26 de outubro, Marabá - PA</span>
+                </div>
+                <div class="menu-logo">
+                    <a href="#inicio"><img class="logo" src="{% static 'src/logo_geral.png' %}" alt="Logo da COAMA"></a>
+                    <span class="logo-text">24, 25 e 26 de outubro, Marabá - PA</span>
+                </div>
+                <ul class="menu-principal-ul">
+                    <!--<li id="btnInicio"><a href="#" id="inicio">Início</a></li>
+                    <li><a href="#profissionais">Profissionais</a></li>
+                    <li><a href="#cronograma">Cronograma</a></li>
+                    -->
+                    <li><li class="dropdown" style="max-width: 200px;">
+                        <a href="{% url "login" %}" class="botao-cursos" style="max-height: 100px; text-wrap: nowrap;">Inscreva-se</a>
+                    </li>
+                    {% comment %} <button class="botao-inscreva-se" disabled>Inscreva-se <img
+                            src="{% static 'src/cadeado_preto.svg' %}" alt="Botão Inscreva-se"
+                            class="icone-cadeado"></button> {% endcomment %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <script src="{% static '/js/initial_scroll.js' %}"></script>
+    <!--fim menu principal-->
+    <!--Carrossel -->
+    <div id="first_element" class="carousel-container">
+        <img src="{% static 'src/collum_1.png' %}" id="collumns1" alt="">
+        <div class="carousel">
+            <div class="carousel-inner">
+                <img src="{% static 'src/auditorio.png' %}" alt="Imagem do auditorio">
+                <img src="{% static 'src/prof_denilson.png' %}" alt="Imagem do professor Denilson">
+                <img src="{% static 'src/mining_03.png' %}" alt="Imagem de uma mineradora">
+            </div>
+            <div class="carousel-navigation"></div>
+        </div>
+        <img src="{% static 'src/collum_2.png' %}" id="collumns2" alt="">
+    </div>
+    <script src="{% static '/js/carrossel1.js' %}"></script>
+
+    <!--Menu rolagem-->
+    <script src="{% static '/js/script.js' %}"></script>
+    <!--fim menu rolagem-->
+    <!--countdown-->
+    <h1 class="contador">Faltam</h1>
+    <div class="countdown-container">
+        <div class="countdown-el days-c">
+            <p class="text" id="days">0</p>
+            <span>dias</span>
+        </div>
+
+        <div class="countdown-el hours-c">
+            <p class="text" id="hours">0</p>
+            <span>horas</span>
+        </div>
+
+        <div class="countdown-el minutes-c">
+            <p class="text" id="minutes">0</p>
+            <span>minutos</span>
+        </div>
+
+        <div class="countdown-el seconds-c">
+            <p class="text" id="seconds">0</p>
+            <span>segundos</span>
+        </div>
+    </div>
+    <h1 class="contador">Para o fim do segundo lote</h1>
+    <div class="button-container">
+        <button class="custom-button"><a href="{% url "login" %}" class="botao-cursos">Inscreva-se</a></button>
+    </div>
+    <script src="{% static '/js/countdown.js' %}"></script>
+    <!--fim countdown-->
+    <main>
+        <div class="custom-div">
+            <div class="title-mobile">
+                <h2>O Congresso</h2>
+            </div>
+            <div class="inner-box-mobile">
+                Destinado a uma ampla gama de profissionais, o Coama é um fórum de debate que fortalece a integração
+                entre comunidades acadêmicas e profissionais, incentivando a troca de conhecimentos. O evento é
+                essencial para o desenvolvimento do setor minero-metalúrgico na região da Amazônia Legal.
+            </div>
+            <div class="title-desk">
+                <h2>O Congresso</h2>
+            </div>
+            <div class="inner-box">
+                Destinado a uma ampla gama de profissionais, desde pesquisadores e acadêmicos até gestores e empresas de
+                consultoria, o Coama é um amplo fórum de debate. O congresso fortalece a integração entre comunidades
+                acadêmicas e profissionais, incentivando a troca de conhecimentos e práticas industriais. Isso posiciona
+                o Coama como uma ferramenta chave para a difusão de inovações científicas e tecnológicas, essencial para
+                o desenvolvimento do setor minero-metalúrgico. Embora em sua terceira edição, o Coama já é considerado
+                um evento de grande relevância para o Pará e toda a Amazônia Legal, atuando como um canal estratégico
+                para o fortalecimento da pesquisa tecnológica e desenvolvimento de competências profissionais. Eventos
+                como o Coama são fundamentais para promover o debate e estimular o avanço científico, essenciais para o
+                futuro da mineração sustentável.
+            </div>
+            <style>
+                table {
+                 border-collapse: collapse;
+                 width: 700px;
+                 margin: 20px 0;
+                 font-family: Arial, sans-serif;
+             }
+             th, td {
+                 border: 1px solid black;
+                 text-align: center;
+                 padding: 8px;
+             }
+             thead th {
+                 background-color: whitesmoke;
+                 color: black;
+                 font-weight: bold;
+             }
+             tbody td {
+                 background-color: whitesmoke;
+                 color: black;
+             }
+             tbody tr:nth-child(odd) td {
+                 background-color: whitesmoke;
+             }
+             tbody th {
+                 background-color: whitesmoke;
+                 color: black;
+                 font-weight: bold;
+             }
+             .limite, .combo, .autor {
+                 background-color: whitesmoke;
+                 color: black;
+                 font-weight: lighter;
+             }
+
+             @media only screen and (max-width: 1040px){
+                table {
+                    width: fit-content;
+                }
+             }
+         </style>
+         <div style="display: flex; flex-direction: column; align-items: center;">
+            <table border="1" width="700">
+                <thead><th colspan="5">VALORES DOS INGRESSOS POR LOTE</th></thead>
+                <tbody>
+                    <tr>
+                        <th rowspan="2">Lote</th>
+                        <th rowspan="2">Período</th>
+                        <th colspan="3">Valores</th>
+                        <tr>
+                            <td>Estudante</td>
+                            <td>Estudante de Pós-graduação</td>
+                            <td>Profissional</td>
+                        </tr>
+                    </tr>
+                    <tr>
+                        <td>1° Lote</td>
+                        <td>20/05 a 08/07</td>
+                        <td> R$ 50,00</td>
+                        <td> R$ 70,00</td>
+                        <td> R$ 100,00</td>
+                    </tr>
+                    <tr>
+                        <td>2° Lote</td>
+                        <td>09/07 a 28/08</td>
+                        <td> R$ 70,00</td>
+                        <td> R$ 90,00</td>
+                        <td> R$ 120,00</td>
+                    </tr>
+                    <tr>
+                        <td>3° Lote</td>
+                        <td>29/08 a 24/09</td>
+                        <td> R$ 90,00</td>
+                        <td> R$ 110,00</td>
+                        <td> R$ 140,00</td>
+                    </tr>
+                </tbody>
+                </table>
+                <table  border="1" width="700">
+                <thead >
+                    <tr>
+                        <th colspan="3">INFORMAÇÕES IMPORTANTES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Submissão de trabalhos</td>
+                        <td>Até 09/09</td>
+                        <td>15 dias antes do congresso</td>
+                    </tr>
+                    <tr>
+                        <td>Resposta de aceite dos trabalhos</td>
+                        <td>Até 17/09</td>
+                        <td>7 dias antes do congresso</td>
+                    </tr>
+                    <tr>
+                        <th class="limite" rowspan="2">Limite de submissão/tipo de autor</th>
+                        <td>Autor principal</td>
+                        <td>Até 4 trabalhos</td>
+                    </tr>
+                    <tr>
+                        <td>Coautor</td>
+                        <td>sem limite</td>
+                    </tr>
+                    <tr >
+                        <td>Limite de autores/artigo</td>
+                        <th class="autor" colspan="2">1 Autor principal + 6 coautores</th>
+                    </tr>
+                    <tr >
+                        <th class="combo" rowspan="3">Combos</th>
+                        <td  colspan="2">5 inscrições = 10% de desconto/inscrição</td>
+                    </tr>
+                    <tr>
+                        <td  colspan="2">inscrição + minicurso = 10% de desconto</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        </div>
+        <div class="imagem-container">
+            <img src="{% static 'src/polygon.png' %}" alt="Imagem Poligonal">
+        </div>
+
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/9MnQNJPTgTU?si=w2IGcQkDMLdWm9JJ"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <div class="maps-container">
+            <div class="custom-div-ad">
+                <div class="inner-box-ad">
+                    <p>Local do Evento</p>
+                    <p>Carajás Centro de Convenções - Leonildo Borges Rocha</p>
+                    <p>Endereço: BR-222 - Vila Militar Pres. Medice, Marabá - PA</p>
+                </div>
+            </div>
+            <div class="mapa">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3972.396122445543!2d-49.07965103258306!3d-5.356371652398855!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x92c3a18366062c65%3A0xb91a4c98d8a99b95!2sCaraj%C3%A1s%20Centro%20de%20Conven%C3%A7%C3%B5es%20-%20Leonildo%20Borges%20Rocha!5e0!3m2!1spt-BR!2sbr!4v1713741782626!5m2!1spt-BR!2sbr"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+        <div class="patrocinadores-text">
+            <span>Apoio Institucional</span>
+        </div>
+        <div class="apoio">
+            <img src="{% static 'src/caemat.png' %}" alt="Icone Caemat">
+            <img src="{% static 'src/caemma.png' %}" alt="Icone Caemma">
+            <img src="{% static 'src/cageo_mab.png' %}" alt="Icone Cageo">
+        </div>
+        <div class="patrocinadores-text">
+            <span>Patrocinadores Diamante&nbsp;</span>
+            <div class="icons-mining">
+                <img src="{% static 'src/diamond_icon.png' %}" alt="Icone de um diamente">
+            </div>
+        </div>
+        <div class="patrocinadores-text">
+            <div class="patrocinadores-diamante">
+                <img src="{% static 'src/ozminerals-logo.png' %}" alt="Icone Patrocinador OZMINERALS">
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="contatos">
+            <div class="text-block">
+                <div class="block">
+                    <span class="contato-bolder">Contato</span>
+                    <span>(94)99141-9412</span>
+                    <span>contato@coama.com</span>
+                    <span>Folha 17, Quadra 04, Lote</span>
+                    <span>Especial, s/n.º - Nova Marabá,</span>
+                    <span>PA, 68505-080</span>
+                </div>
+            </div>
+            <div class="icone-footer">
+                <img src="{% static 'src/icon_footer.png' %}" alt="Logo">
+            </div>
+        </div>
+        <div class="tj">
+            <span>2024 © COAMA - Congresso Amazônico de Mineração, Metalurgia e Materiais. Desenvolvido por: BITS
+                Jr.</span>
+            <img src="{% static 'src/bits-logo.png' %}" alt="Icone BITS JR. do Curso de Engenharia da Computação">
+        </div>
+        <div class="tj-media-query">
+            <span>2024 © COAMA - Desenvolvido por: BITS
+                Jr.</span>
+            <img src="{% static 'src/bits-logo.png' %}" alt="Icone BITS JR. do Curso de Engenharia da Computação">
+        </div>
+    </footer>
+</body>
+
+
+</html>
