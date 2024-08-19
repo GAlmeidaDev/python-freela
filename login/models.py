@@ -52,13 +52,13 @@ class Professional(models.Model):
     enterprise_name = models.CharField(verbose_name="Nome da Empresa", max_length=100)
     enterprise = models.CharField(verbose_name="Empresa", max_length=3, choices=ENTERPRISE_TYPE)
 
-class Minicurso(models.Model):
+""" class Minicurso(models.Model):
     nome = models.CharField(max_length=255)
     ministrante = models.CharField(max_length=255)
     turno = models.CharField(max_length=20)
     carga_horaria = models.CharField(max_length=10)
     vagas = models.IntegerField(default=0)
-    descricao = models.TextField()
+    descricao = models.TextField() """
 
 #Add mod tudo abaixo
 class ComboRegistration(models.Model):

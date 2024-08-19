@@ -8,7 +8,7 @@ from django.contrib.auth import logout as django_logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import JsonResponse
-from login.models import Person, Student, PosGradStudent, Professional, Minicurso
+from login.models import Person, Student, PosGradStudent, Professional
 from login.paymentsUtils import attPrefferences, getCoursePrefferences, getCoursePrefferencesDesconto
 from .forms import uploadFileForm
 
@@ -134,11 +134,9 @@ def check_cpf(request):
 
         all_exist = all(cpf_exists.values())
 
-        # Garantir que o dicionário de emails é sempre retornado
         if all_exist:
             return JsonResponse({'success': True, 'emails': emails})
         else:
-            # 'success' é False para indicar que nem todos os CPFs foram encontrados
             return JsonResponse({'success': False, 'error': 'Um ou mais CPFs não estão em nosso sistema', 'emails': emails})
     else:
         return JsonResponse({'success': False, 'error': 'Método de solicitação inválido', 'emails': emails})
@@ -238,13 +236,6 @@ def check_completion(request):
     
 
 def paymentSuccess(request):
-    course_id = request.POST.get('course_id')
-    course = get_object_or_404(Course, id=course_id)
-
-    if course.vagas > 0:
-        course.vagas -= 1
-        course.save()
-
     person = Person.objects.get(user=request.user)
 
     person.payed = True
@@ -448,46 +439,8 @@ def getCPF(request):
         return redirect('area-do-usuario') 
     
     
-def send_custom_email(subject, message, recipient_list, from_email=None, fail_silently=False):
+""" def send_custom_email(subject, message, recipient_list, from_email=None, fail_silently=False):
     if from_email is None:
         from_email = settings.DEFAULT_FROM_EMAIL
 
-    send_mail(subject, message, from_email, recipient_list, fail_silently=fail_silently)
-
-def minicursos_view(request):
-    minicursos = Minicurso.objects.all()
-    
-    data = [
-        {
-            "nome": curso.nome,
-            "ministrante": curso.ministrante,
-            "turno": curso.turno,
-            "carga_horaria": curso.carga_horaria,
-            "vagas": curso.vagas,
-            "descricao": curso.descricao
-        }
-        for curso in minicursos
-    ]
-    
-    return JsonResponse(data, safe=False)
-
-def add_course(request):
-    if request.method == 'POST':
-        try:
-            data = json.loads(request.body)
-            course = Minicurso(
-                nome=data['nome'],
-                ministrante=data['ministrante'],
-                turno=data['turno'],
-                carga_horaria=data['carga_horaria'],
-                vagas=data['vagas'],
-                descricao=data['descricao']
-            )
-            course.save()
-            return JsonResponse({'status': 'success', 'message': 'Curso adicionado com sucesso!'})
-        except KeyError as e:
-            return JsonResponse({'status': 'error', 'message': f'Campo ausente: {str(e)}'}, status=400)
-        except Exception as e:
-            return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
-    return JsonResponse({'status': 'error', 'message': 'Método não permitido'}, status=405)
-
+    send_mail(subject, message, from_email, recipient_list, fail_silently=fail_silently) """
