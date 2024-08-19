@@ -116,25 +116,33 @@ def check_cpf(request):
     if request.method == 'POST':
         cpf_fields = ['cpf1', 'cpf2', 'cpf3', 'cpf4']
         cpf_exists = {}
+        emails = {}
 
         for cpf_field in cpf_fields:
             cpf = request.POST.get(cpf_field)
             if cpf:
-                user_exists = Person.objects.filter(cpf=cpf).exists()
-                cpf_exists[cpf_field] = user_exists
+                user = Person.objects.filter(cpf=cpf).first()
+                if user:
+                    cpf_exists[cpf_field] = True
+                    emails[cpf_field] = user.email 
+                else:
+                    cpf_exists[cpf_field] = False
+                    emails[cpf_field] = None
             else:
                 cpf_exists[cpf_field] = False
+                emails[cpf_field] = None
 
         all_exist = all(cpf_exists.values())
 
+        # Garantir que o dicionário de emails é sempre retornado
         if all_exist:
-            return JsonResponse({'success': True})
+            return JsonResponse({'success': True, 'emails': emails})
         else:
-            return JsonResponse({'success': False, 'error': 'Um dos CPFs não está em nosso sistema'})
+            # 'success' é False para indicar que nem todos os CPFs foram encontrados
+            return JsonResponse({'success': False, 'error': 'Um ou mais CPFs não estão em nosso sistema', 'emails': emails})
     else:
-        return JsonResponse({'success': False, 'error': 'Erro no cadastro do usuário'})
+        return JsonResponse({'success': False, 'error': 'Método de solicitação inválido', 'emails': emails})
 
-    
 @login_required(login_url='/auth/login/')
 def register_person_step(request):
     if request.method == 'GET':
@@ -228,14 +236,15 @@ def check_completion(request):
         django_logout(request)
         user.delete()
     
+
 def paymentSuccess(request):
     course_id = request.POST.get('course_id')
     course = get_object_or_404(Course, id=course_id)
-    
+
     if course.vagas > 0:
         course.vagas -= 1
         course.save()
-    
+
     person = Person.objects.get(user=request.user)
 
     person.payed = True
@@ -243,9 +252,15 @@ def paymentSuccess(request):
     
     subject = 'Confirmação de Pagamento'
     message = f'Olá {person.user.first_name},\n\nSeu pagamento foi confirmado com sucesso. Obrigado por sua compra!'
-    recipient_list = [person.user.email]
+
+    verified_emails = json.loads(request.POST.get('verifiedEmails', '{}'))
     
-    send_custom_email(subject, message, recipient_list)
+    recipient_list = list(verified_emails.values())
+    
+    recipient_list.append(person.user.email)
+
+    if recipient_list:
+        send_mail(subject, message, 'from@example.com', recipient_list)
     
     return redirect('area-do-usuario')
 
@@ -308,14 +323,14 @@ def subscriptions(request):
         
         updateSubscription(request, names)
 
-        subject = 'Confirmação de Inscrição em Cursos'
+        """ subject = 'Confirmação de Inscrição em Cursos'
         message = f'Olá {user_data.user.first_name},\n\nVocê se inscreveu com sucesso nos seguintes cursos:\n'
         for course in courses:
             message += f"- {course[0]} ({course[1]}): R$ {course[2]}\n"
         message += f'\nTotal: R$ {total}\nDesconto aplicado: R$ {desconto}\n\nObrigado por se inscrever!'
         recipient_list = [user_data.user.email]
         
-        send_custom_email(subject, message, recipient_list)
+        send_custom_email(subject, message, recipient_list) """
 
         context = {
             'courses' : courses,
