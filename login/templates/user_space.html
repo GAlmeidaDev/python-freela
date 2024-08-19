@@ -442,13 +442,27 @@
                             </div>
                     
                             <div class="selection-courses-box">
-                                <button id="confirm-selection" type="button">Confirmar e selecionar minicursos</button>
+                                <button id="confirm-selection" type="button" style="
+    background-color: #FEB609;
+    border: 1px solid #FEB609;
+    transition: background-color .5s;
+    cursor: pointer;
+    border-radius: 15px;
+    text-transform: uppercase;
+    color: black;
+    font-size: 10px;
+    padding: 10px 50px;
+    font-weight: bold;
+    width: 250px;
+    margin: 1rem;
+">Realizar pagamento</button>
                             </div>
                         </form>
                     </div>
                     
                     <script>
                         document.getElementById('confirm-selection').addEventListener('click', function() {
+
                     
                             const form = document.getElementById('cpf-form');
                             if (!form) {

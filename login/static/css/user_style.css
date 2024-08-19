@@ -488,7 +488,7 @@ i {
 /*fim submissão de trabalho*/
 
 /*inicio payment-box*/
-#selection-courses{
+#confirm-selection {
     background-color: #FEB609;
     border: 1px solid #FEB609;
     transition: background-color .5s;
@@ -503,7 +503,7 @@ i {
     margin: 1rem;
 }
 
-#selection-courses:hover{
+#confirm-selection:hover {
     background-color: black;
     border: 1px solid #FEB609;
     color: #FEB609;
