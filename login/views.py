@@ -250,8 +250,8 @@ def paymentSuccess(request):
     
     recipient_list.append(person.user.email)
 
-    if recipient_list:
-        send_mail(subject, message, 'from@example.com', recipient_list)
+    """ if recipient_list:
+        send_mail(subject, message, 'from@example.com', recipient_list) """
     
     return redirect('area-do-usuario')
 
