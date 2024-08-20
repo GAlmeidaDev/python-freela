@@ -19,5 +19,4 @@ urlpatterns = [
     path('payment-subscription-success/', views.updatePaymentSubscriptionSuccess, name="payment-subscription-success"),
     path('combo/', views.getCPF, name='combo'),
     path('check-cpf/', views.check_cpf, name='check-cpf'),
-    """ path('minicursos/', views.minicursos_view, name='minicursos'), """
 ]
