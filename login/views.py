@@ -293,26 +293,23 @@ def subscriptions(request):
         
         checkIfAlreadySubscripted(request)
         
-        for index in range(len(names)):
-            courses.append([names[index], time[index], values[index]])
-            total += int(values[index])
+        num_pessoas = 5
+        valor_minicurso = 40.0
+        valor_inscricao_evento = 70.0
             
-        preferenceId = getCoursePrefferences(total)
+        total_minicursos = num_pessoas * valor_minicurso
+        total_inscricoes_evento = num_pessoas * valor_inscricao_evento
+        total = total_minicursos + total_inscricoes_evento
 
-        # O trecho abaixo serve para criar um desconto
-        user_data = Person.objects.get(user = request.user)
-        value = 0
-        if user_data.person_type == 1:
-            value = 70.0
-        if user_data.person_type == 2:
-            value = 90.0
-        if user_data.person_type == 3:
-            value = 120.0
-        desconto = 0.9 * (total + value)
-        preferenceDesconto = getCoursePrefferencesDesconto(desconto)
-        # fim
+        desconto = total * 0.10
+        total_com_desconto = total - desconto
+        
+        preferenceId = getCoursePrefferences(total)
+        preferenceDesconto = getCoursePrefferencesDesconto(total_com_desconto)
         
         updateSubscription(request, names)
+
+        user_data = Person.objects.get(user=request.user)
 
         """ subject = 'Confirmação de Inscrição em Cursos'
         message = f'Olá {user_data.user.first_name},\n\nVocê se inscreveu com sucesso nos seguintes cursos:\n'
@@ -328,7 +325,8 @@ def subscriptions(request):
             'preferenceId' : preferenceId,
             'preferenceDesconto' : preferenceDesconto,
             'total' : total,
-            'desconto' : desconto,
+            'desconto': desconto,
+            'total_com_desconto': total_com_desconto,
             'payed': user_data.payed,
         }
         
